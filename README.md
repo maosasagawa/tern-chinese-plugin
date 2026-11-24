@@ -1,8 +1,8 @@
 # Tern Chinese Plugin (`zh-cn`)
 
-[Tern](https://stencil.so/tern) 简体中文汉化插件（`v0.4.0`，完整适配 **Tern 0.9.33**）— **全面汉化原生设置弹窗（分类、标题、说明文案、分段选项、操作按钮与提示文案）、命令面板与标签栏**，并向命令面板注入全部 **241 项内置动作中文直达命令**，附带覆盖 **337 项设置的交互式中文设置中心**与**中文快捷键管理**。
+[Tern](https://stencil.so/tern) 简体中文汉化插件（`v0.4.1`，完整适配 **Tern 0.9.33**）— **全面汉化原生设置弹窗（分类、标题、说明文案、分段选项、操作按钮与提示文案）、命令面板与标签栏**，并向命令面板注入全部 **241 项内置动作中文直达命令**，附带覆盖 **337 项设置的交互式中文设置中心**与**中文快捷键管理**。
 
-A Simplified Chinese (`zh-CN`) localization plugin for [Tern](https://stencil.so/tern) (`v0.4.0`, aligned with **Tern 0.9.33**) that translates the native Settings dialog (sidebar, all 14 pages, descriptions, hints, segmented options, and action buttons), Command Palette scope tabs & footer, and tab-bar buttons via CSS, alongside an interactive 337-setting Chinese Settings Center, Keybind Manager, and 241-action Chinese Command Menu.
+A Simplified Chinese (`zh-CN`) localization plugin for [Tern](https://stencil.so/tern) (`v0.4.1`, aligned with **Tern 0.9.33**) that translates the native Settings dialog (sidebar, all 14 pages, descriptions, hints, segmented options, and action buttons), Command Palette scope tabs & footer, and tab-bar buttons via CSS, alongside an interactive 337-setting Chinese Settings Center, Keybind Manager, and 241-action Chinese Command Menu.
 
 ![Tern 原生设置界面汉化效果](docs/preview.png)
 
@@ -10,10 +10,10 @@ A Simplified Chinese (`zh-CN`) localization plugin for [Tern](https://stencil.so
 
 ## 核心特性 / Features
 
-1. **原生设置弹窗全量汉化（v0.4.0 适配 Tern 0.9.33）**
+1. **原生设置弹窗全量汉化（v0.4.1 适配 Tern 0.9.33）**
    - 汉化左侧导航栏全部 14 个分类（常规、智能体、外观、终端、命令镜头、数据库、笔记本、Carly 助手、快捷键、Git、插件、会话、主机、高级）。
-   - 汉化右侧 14 个设置页的**标题、说明文案、提示信息、分段选项按钮与操作按钮**，同时保留动态信息（如当前版本号、当前绘制设备、当前会话统计、已安装插件名称与远程主机名称）。
-   - **跨平台防错位**：针对 Windows / macOS / Linux 不同平台下的设置项差异（如 `Global hotkeys`、`Desktop integration`、`Middle-click paste`、`Thicken text`、`System title bar` / `System traffic lights`）采用结构特征或尾部锚点定位，搜索设置时自动退出分类作用域。
+   - 汉化右侧 14 个设置页的**标题、说明文案、提示信息、分段选项按钮与操作按钮**，同时保留动态信息（如当前版本号、当前绘制设备、当前会话统计、已安装插件名称与远程主机名称）；连接远程主机时汉化 `客户端 / 远程主机`（`At client / At host`）作用域切换按钮。
+   - **跨平台防错位**：针对 Windows / macOS / Linux 不同平台下的设置项差异（如 Windows 无 `Browser` 与 `Three-finger swipes`、无/有 `Global hotkeys`、`Desktop integration`、`Middle-click paste`、`Thicken text`、`System title bar` / `System traffic lights`）采用结构特征与前后兄弟锚点定位，搜索设置时自动退出分类作用域。
 2. **命令面板 & 标签栏汉化**
    - 汉化命令面板全部 8 个作用域页签（`全部 / 命令 / 文件 / 搜索 / 分支 / 提交 / 会话 / 主机`）与底栏提示（`↑ ↓ 选择`、`↵ 执行`、`esc 关闭`）及标签栏按钮文字（`新建标签页`、`文件`）。
    - 原生命令面板直接注册全部 **241 项内置命令中文入口** + 插件自带快捷命令，直接输入中文即可搜索触发。
