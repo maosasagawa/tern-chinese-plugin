@@ -38,7 +38,7 @@ end
 local function is_override_enabled()
 	local v = tern.kv.get(KV_OVERRIDE_KEY)
 	if v == nil then
-		return true
+		return false
 	end
 	return v == true
 end

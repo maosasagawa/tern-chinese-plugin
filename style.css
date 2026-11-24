@@ -1,9 +1,951 @@
-/* 针对 zh-cn 插件 Canvas 面板的轻量排版优化，不影响 Tern 原生界面 */
-[data-surface="plugin.zh-cn"] .sf-card,
-[data-surface="carly"] .sf-card {
-	border-radius: 10px;
-}
+/* Tern 简体中文汉化样式 (v0.2.0)
+ * 1. 直接汉化原生 Settings 弹窗（导航栏、全部 14 个设置页、分组与设置项标题）、命令面板作用域页签与标签栏按钮
+ * 2. 搜索设置时自动退出分类作用域（nav-row.on 不存在），防止搜索结果错位
+ * 3. Plugins 页仅锚定首尾固定行，中间已安装插件卡片与远程主机列表保持原样
+ */
 
-.zh-cn-muted {
-	color: var(--t3);
-}
+[data-surface="plugin.zh-cn"] .sf-card,
+[data-surface="carly"] .sf-card { border-radius: 10px; }
+.zh-cn-muted { color: var(--t3); }
+
+/* ── 命令面板作用域页签（第 5、6 项为上下文隐藏标签） ── */
+.tn-pl-scopes .tn-pl-scope:nth-of-type(1) { font-size: 0; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(1)::before { content: "全部"; font-size: 12px; white-space: nowrap; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(2) { font-size: 0; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(2)::before { content: "命令"; font-size: 12px; white-space: nowrap; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(3) { font-size: 0; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(3)::before { content: "文件"; font-size: 12px; white-space: nowrap; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(4) { font-size: 0; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(4)::before { content: "搜索"; font-size: 12px; white-space: nowrap; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(7) { font-size: 0; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(7)::before { content: "会话"; font-size: 12px; white-space: nowrap; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(8) { font-size: 0; }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(8)::before { content: "主机"; font-size: 12px; white-space: nowrap; }
+
+/* ── 标签栏按钮文字 ── */
+button.tb-add > span.lbl { font-size: 0; }
+button.tb-add > span.lbl::before { content: "新建标签页"; font-size: 13px; white-space: nowrap; }
+button.tb-files > span.lbl { font-size: 0; }
+button.tb-files > span.lbl::before { content: "文件"; font-size: 13px; white-space: nowrap; }
+
+/* ── 原生设置弹窗：顶栏与左侧导航栏 ── */
+.pf-brand > .pf-name { font-size: 0; }
+.pf-brand > .pf-name::before { content: "设置"; font-size: 14px; font-weight: 600; }
+
+.pf-groups .pf-group:nth-of-type(1) > .nav-head { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) > .nav-head::before { content: "应用"; font-size: 12.5px; }
+.pf-groups .pf-group:nth-of-type(2) > .nav-head { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(2) > .nav-head::before { content: "系统"; font-size: 12.5px; }
+
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(1) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(1) .lbl::before { content: "常规"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(2) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(2) .lbl::before { content: "智能体"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(3) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(3) .lbl::before { content: "外观"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(4) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(4) .lbl::before { content: "终端"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(5) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(5) .lbl::before { content: "命令镜头"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(6) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(6) .lbl::before { content: "数据库"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(7) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(7) .lbl::before { content: "笔记本"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(8) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(8) .lbl::before { content: "Carly 助手"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(9) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(9) .lbl::before { content: "快捷键"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(10) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(10) .lbl::before { content: "Git"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(11) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(1) .pf-items > .nav-row:nth-of-type(11) .lbl::before { content: "插件"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(2) .pf-items > .nav-row:nth-of-type(1) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(2) .pf-items > .nav-row:nth-of-type(1) .lbl::before { content: "会话"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(2) .pf-items > .nav-row:nth-of-type(2) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(2) .pf-items > .nav-row:nth-of-type(2) .lbl::before { content: "主机"; font-size: 13.5px; }
+.pf-groups .pf-group:nth-of-type(2) .pf-items > .nav-row:nth-of-type(3) .lbl { font-size: 0; }
+.pf-groups .pf-group:nth-of-type(2) .pf-items > .nav-row:nth-of-type(3) .lbl::before { content: "高级"; font-size: 13.5px; }
+
+/* ── 设置页 1：常规 (General) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "常规"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "Shell 终端"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "默认 Shell"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "标签与分屏"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "新建标签与分屏默认启动"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "新建标签起始位置"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "默认启动目录"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "文本选择"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "选中即复制"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "超链接"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "打开链接方式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "网页链接打开位置"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "内置浏览器"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "新浏览器块的网站数据存储"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "浏览器配置档案"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t::before { content: "文件树"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "显示隐藏文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "显示 Git 忽略文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "过滤搜索包含忽略目录"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "折叠单一子目录链"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "自动定位当前打开文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "单击文件即预览"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t::before { content: "自动保存"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "编辑器自动保存"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-last-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-last-of-type(2) > h2.pf-sec-t::before { content: "更新"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-last-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-last-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "自动检查并下载更新"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:last-of-type > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:last-of-type > h2.pf-sec-t::before { content: "omp 助手"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:last-of-type .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:last-of-type .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "由 Tern 自动托管"; font-size: 13.5px; }
+
+/* ── 设置页 2：智能体 (Agents) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "智能体"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "默认配置"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "默认智能体命令"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "新建智能体打开位置"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "系统通知"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "等待人工确认时通知"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "回复完成时通知"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "ACP 原生对话"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "输入 Agent CLI 时自动以 ACP 聊天打开"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "显示 Claude 思考摘要"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "自定义智能体"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "智能体列表"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "MCP 服务器"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "服务器列表"; font-size: 13.5px; }
+
+/* ── 设置页 3：外观 (Appearance) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "外观"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "配色主题"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "当前主题配置"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "外观与字体"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "外观模式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "终端主字体"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "粗体字体"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "斜体字体"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "粗斜体字体"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "字体字重"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(8) > .pf-lbl > .t::before { content: "代码等宽字体"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(7) > .pf-lbl > .t::before { content: "界面无衬线字体"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(6) > .pf-lbl > .t::before { content: "终端行高"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(5) > .pf-lbl > .t::before { content: "字符宽度"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(4) > .pf-lbl > .t::before { content: "窗格内边距"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(3) > .pf-lbl > .t::before { content: "文字像素对齐"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-last-of-type(2) > .pf-lbl > .t::before { content: "自动对比度修正"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:last-of-type > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:last-of-type > .pf-lbl > .t::before { content: "减弱动画效果"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "光标与指针"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "光标形状"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "允许程序改变光标"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "光标闪烁"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "呼吸渐变闪烁"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "平滑滑行"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "移动拖尾特效"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "形状切换脉冲"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "在终端窗格生效"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(9) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(9) > .pf-lbl > .t::before { content: "在输入编排器生效"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(10) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(10) > .pf-lbl > .t::before { content: "在编辑器生效"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(11) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(11) > .pf-lbl > .t::before { content: "鼠标指针样式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "界面风格"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "窗口布局"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "背景材质"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "不透明度"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "背景模糊"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "界面密度"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "标签栏位置"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "自动隐藏侧边标签栏"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "滚轮滚动侧边标签栏切换标签"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:last-of-type > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:last-of-type > .pf-lbl > .t::before { content: "自定义程序图标"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "窗格与状态栏"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "窗格标题栏"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "底部组件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "组件栏外观"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "原生 tmux 状态栏"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t::before { content: "程序原生界面"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "对话阅读风格"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "折叠工具调用"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "展开思考过程"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "上下文状态条"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "失焦保持输入框展开"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "输入框渲染模式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "Markdown 标题样式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "代码编辑对比方式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(9) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(9) > .pf-lbl > .t::before { content: "Tab 缩进宽度"; font-size: 13.5px; }
+
+/* ── 设置页 4：终端 (Terminal) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "终端"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "滚动与历史"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "平滑滚动"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "弹性回弹"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "滚动条显示"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "三指触控板手势"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "滚动速度"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "回滚缓冲行数"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "程序集成"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "原生程序界面 (TSP)"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "原生命令输出镜头"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "长输出折叠阈值"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "原生 Shell Tab 补全"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "原生编排器编辑体验"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "聊天自动拼写纠错"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "原生提示符"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "启用原生提示符"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "预设风格起点"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "配色方案"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "填充方式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "分段形状"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "外框样式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "框线右端收尾"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "中间填充线"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(9) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(9) > .pf-lbl > .t::before { content: "提示符字符"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(10) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(10) > .pf-lbl > .t::before { content: "分段分隔符"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(11) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(11) > .pf-lbl > .t::before { content: "Git 状态格式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(12) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(12) > .pf-lbl > .t::before { content: "目录显示格式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(13) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(13) > .pf-lbl > .t::before { content: "显示分段图标"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(14) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(14) > .pf-lbl > .t::before { content: "时钟格式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(15) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(15) > .pf-lbl > .t::before { content: "提示符前空行"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(16) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(16) > .pf-lbl > .t::before { content: "提示符分段定制"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(17) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(17) > .pf-lbl > .t::before { content: "折叠历史提示符"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "安全与隐私"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "程序写入剪贴板"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "程序超链接"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "程序桌面通知"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "粘贴保护"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "粘贴危险内容前确认"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "替换危险控制字符"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "粘贴换行符不触发执行"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "粘贴大文本前确认"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "提示符处自动引号转义 URL"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(4).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t::before { content: "内置命令"; font-size: 12.5px; }
+
+/* ── 设置页 5：命令镜头 (Lenses) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "命令镜头"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "Git 状态与操作"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "工作区状态"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "差异对比"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "分支列表"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "标签列表"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "远程仓库"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "拉取与推送"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "已追踪文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "Git 历史"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "提交日志"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "提交与变更文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "引用日志 (Reflog)"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "贮藏区 (Stash)"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "代码追溯 (Blame)"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "贡献者统计"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "GitHub 与 Jujutsu"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "GitHub 列表"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "GitHub 详情"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "Jujutsu 日志"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "Jujutsu 状态"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "Jujutsu 差异"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "文件与目录"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "目录列表"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "目录树"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "查找到的文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "磁盘占用"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "行数与字数统计"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "文件详情"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "命令路径查找"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "通用查看器"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "文件内容"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "实时跟踪日志"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "Diff 差异"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "JSON 与 YAML"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "查询结果"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "表格数据"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t::before { content: "文本搜索"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "匹配结果"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t::before { content: "Rust 与构建"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "Cargo 构建"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "Cargo 测试"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "Cargo 依赖树"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "编译器诊断信息"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "构建运行器"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "Swift 与 Xcode"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) > h2.pf-sec-t::before { content: "JavaScript / TypeScript"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "类型错误"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "Lint 与格式化检查"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "单元测试"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "依赖安装"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "包与脚本"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) > h2.pf-sec-t::before { content: "Python 与 Go"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "Python 测试"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "Python 检查"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "Python 包管理"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "Go 测试"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "Go 构建"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) > h2.pf-sec-t::before { content: "系统监控"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "进程列表"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "磁盘挂载"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "环境变量"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "网络套接字"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "负载与内存"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "系统信息"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "Shell 历史记录"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "日历"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(9) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(9) > .pf-lbl > .t::before { content: "Homebrew"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) > h2.pf-sec-t::before { content: "网络诊断"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "Ping 连通性"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "HTTP 请求"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "DNS 解析"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "路由表"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) > h2.pf-sec-t::before { content: "容器与云原生"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "容器与镜像"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "容器构建"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "容器日志"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "Kubernetes 资源"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "Kubernetes 详情"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "Helm 发布"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "Terraform 计划"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "云服务 CLI"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) > h2.pf-sec-t::before { content: "文档与手册"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "Manual 手册页"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "tldr 速查"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "命令 Help 帮助"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(5).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "systemd 服务"; font-size: 13.5px; }
+
+/* ── 设置页 6：数据库 (Databases) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "数据库"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "常规"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "默认目录策略"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "指定文件夹"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "最近打开文件上限"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "只读模式快捷键打开最近项"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "恢复会话时重新打开数据库"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "保存项目时询问 SQL 标签页"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "数据库文件类型"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "支持的文件后缀"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "数据库行为"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "新建库默认编码"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "启用外键约束"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "结构树单行显示建表语句"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "每页预取行数"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "新建字段默认类型"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "结构树字号"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "自动刷新只读数据库"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "跳过未知排序规则询问"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(9) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(9) > .pf-lbl > .t::before { content: "打开后自动执行 SQL"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "数据浏览器"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "网格字体"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "网格字号"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "最大查询行数"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "单元格显示字符上限"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "过滤补全与汇总行数上限"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "图片单元格预览"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "单元格自动换行"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "过滤防抖延迟"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(9) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(9) > .pf-lbl > .t::before { content: "过滤转义字符"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(10) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(10) > .pf-lbl > .t::before { content: "NULL 占位文本"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(11) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(11) > .pf-lbl > .t::before { content: "BLOB 占位文本"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "单元格配色"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "NULL 单元格"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "BLOB 单元格"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "普通单元格"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "格式化单元格"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t::before { content: "编辑单元格"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "紧凑缩进 JSON/XML"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "排序 JSON 键名"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "自动切换编辑模式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "编辑器自动折行"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t::before { content: "从结构拖拽生成 SQL"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "生成 SELECT 查询"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "生成 INSERT 语句"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "带 Schema 限定名"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "标识符加引号"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) > h2.pf-sec-t::before { content: "SQL 编辑器"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "编辑器字体"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "编辑器字号"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "查询结果字号"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "Tab 宽度"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "使用 Tab 缩进"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "长行折行模式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(7) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(7) > .pf-lbl > .t::before { content: "标识符引号风格"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(8) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(8) > .pf-lbl > .t::before { content: "SQL 代码补全"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(9) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(9) > .pf-lbl > .t::before { content: "关键字大小写"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(10) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(10) > .pf-lbl > .t::before { content: "标记出错 SQL 语句"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(11) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(11) > .pf-lbl > .t::before { content: "编辑器与结果左右并排"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(12) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(12) > .pf-lbl > .t::before { content: "标签页显示关闭按钮"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) > h2.pf-sec-t::before { content: "扩展与函数"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "自动加载扩展库"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "禁用 REGEXP 函数"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(6).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "允许 SQL 调用 load_extension"; font-size: 13.5px; }
+
+/* ── 设置页 7：笔记本 (Notebooks) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "笔记本"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "内核"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "本机 Python 解释器"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "打开笔记本时立即启动内核"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "运行控制"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "单元格出错后停止后续运行"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "重启内核前询问确认"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "编辑体验"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "代码单元显示行号"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "代码单元自动折行"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "输入时自动弹出补全"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "输出渲染"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "长输出滚动阈值"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "图表渲染格式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "交互式 HTML 输出"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "保存与元数据"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "自动保存间隔"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(7).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "记录单元执行耗时"; font-size: 13.5px; }
+
+/* ── 设置页 8：Carly 助手 (Carly) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "Carly 助手"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "智能体"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "默认模型"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "记忆管理"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "实时语音"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "语音音色"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "打开面板自动开启语音"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "定时任务"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(8).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "心跳检查间隔"; font-size: 13.5px; }
+
+/* ── 设置页 9：快捷键 (Keyboard) ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "快捷键"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "快捷终端"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "输入法 (IME)"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "键位预设"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "标签与会话"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "功能块与分屏"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t::before { content: "滚动历史、查找与剪贴板"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t::before { content: "窗口与界面"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) > h2.pf-sec-t::before { content: "代码编辑器"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) > h2.pf-sec-t::before { content: "数据库面板"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) > h2.pf-sec-t::before { content: "笔记本"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) > h2.pf-sec-t::before { content: "任务看板"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) > h2.pf-sec-t::before { content: "白板画布"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) > h2.pf-sec-t::before { content: "Git 面板"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "弹出样式"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "失去焦点时自动隐藏"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "在终端中使用输入法"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "在编辑器中使用输入法"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:first-of-type > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:first-of-type > .pf-lbl > .t::before { content: "快捷键预设方案"; font-size: 13.5px; }
+
+/* ── 设置页 10：Git ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "Git"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "拉取同步"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "自动 Fetch 间隔"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "Fetch 时自动清理失效分支"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "工具栏 Pull 按钮策略"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "提交历史"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "初始加载提交数"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "滚动到底部继续加载"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "新建仓库默认分支名"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "图谱显示列"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "显示作者"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "显示日期"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "显示 SHA"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "差异对比 (Diff)"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "并排对比差异"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "显示完整文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "按目录树显示文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "文本编码"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "面板默认宽度"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(5) > h2.pf-sec-t::before { content: "提交身份档案"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(6) > h2.pf-sec-t::before { content: "添加身份档案"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) > h2.pf-sec-t::before { content: "SSH 鉴权"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "使用系统 SSH Agent"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "私钥路径"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "公钥路径"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(7) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "复制公钥"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) > h2.pf-sec-t::before { content: "GPG 签名"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "GPG 可执行程序"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "签名密钥 ID"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "默认签名提交"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(8) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "默认签名标签"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) > h2.pf-sec-t::before { content: "外部编辑器"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "编辑器命令"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(9) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "测试启动"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) > h2.pf-sec-t::before { content: "Git 可执行文件"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "使用自定义 Git 路径"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(10) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "Git 可执行文件路径"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) > h2.pf-sec-t::before { content: "操作通知"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "操作成功时提示"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(11) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "操作失败时提示"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) > h2.pf-sec-t::before { content: "AI 辅助"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(12) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "使用模型"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(13) > h2.pf-sec-t::before { content: "当前仓库"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) > h2.pf-sec-t::before { content: "Git-flow 分支约定"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "生产分支"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "开发分支"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "功能分支前缀"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "发布分支前缀"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(10).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(14) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "热修分支前缀"; font-size: 13.5px; }
+
+/* ── 设置页 11：插件 (Plugins) — 仅锚定固定行，保留已安装插件名称与远端主机名 ── */
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "插件"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc section.pf-sec:first-of-type > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc section.pf-sec:first-of-type > h2.pf-sec-t::before { content: "插件管理"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc section.pf-sec:first-of-type .pf-row:first-of-type > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc section.pf-sec:first-of-type .pf-row:first-of-type > .pf-lbl > .t::before { content: "启用插件系统"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc section.pf-sec:first-of-type .pf-row:nth-last-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc section.pf-sec:first-of-type .pf-row:nth-last-of-type(2) > .pf-lbl > .t::before { content: "插件目录"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc section.pf-sec:first-of-type .pf-row:last-of-type > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(11).on) + .pf-scroll .pf-doc section.pf-sec:first-of-type .pf-row:last-of-type > .pf-lbl > .t::before { content: "安装插件…"; font-size: 13.5px; }
+
+/* ── 设置页 12：会话 (Sessions) ── */
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "会话"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "后台守护进程"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "开机自启守护进程"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "显示系统托盘图标"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "Socket 路径"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "当前窗口"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "多会话视图"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "点击其他会话标签页时"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "启动时"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "自动重连上次远程主机"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) > h2.pf-sec-t::before { content: "关闭确认"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(1).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(4) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "关闭前弹出确认"; font-size: 13.5px; }
+
+/* ── 设置页 13：主机 (Hosts) ── */
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "主机"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "会话共享"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "允许共享本机终端会话"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "已保存主机"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:last-of-type > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:last-of-type > .pf-lbl > .t::before { content: "添加远程主机"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(2).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "主机指纹密钥"; font-size: 12.5px; }
+
+/* ── 设置页 14：高级 (Advanced) ── */
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc h1.pf-title { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc h1.pf-title::before { content: "高级"; font-size: 22px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) > h2.pf-sec-t::before { content: "图形渲染"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "渲染后端"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "当前绘制设备"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "图形抗锯齿"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "多重采样 (MSAA)"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "垂直同步 (VSync)"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(1) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "GPU 排队帧数"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) > h2.pf-sec-t::before { content: "配置文件"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "settings.json 配置文件"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(2) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "配置目录"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) > h2.pf-sec-t::before { content: "诊断与资源目录"; font-size: 12.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(1) > .pf-lbl > .t::before { content: "日志与应用状态"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(2) > .pf-lbl > .t::before { content: "日志目录"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(3) > .pf-lbl > .t::before { content: "发送崩溃报告"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(4) > .pf-lbl > .t::before { content: "主题目录"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(5) > .pf-lbl > .t::before { content: "语法高亮目录"; font-size: 13.5px; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(6) > .pf-lbl > .t { font-size: 0; }
+.pf-nav:has(.pf-group:nth-of-type(2) .nav-row:nth-of-type(3).on) + .pf-scroll .pf-doc section.pf-sec:nth-of-type(3) .pf-row:nth-of-type(6) > .pf-lbl > .t::before { content: "omp 目录"; font-size: 13.5px; }
