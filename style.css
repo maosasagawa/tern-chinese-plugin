@@ -1,0 +1,9 @@
+/* 针对 zh-cn 插件 Canvas 面板的轻量排版优化，不影响 Tern 原生界面 */
+[data-surface="plugin.zh-cn"] .sf-card,
+[data-surface="carly"] .sf-card {
+	border-radius: 10px;
+}
+
+.zh-cn-muted {
+	color: var(--t3);
+}

@@ -1,0 +1,6 @@
+.DS_Store
+Thumbs.db
+*.log
+*.tar.gz
+tern.d.luau
+.luarc.json

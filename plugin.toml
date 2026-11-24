@@ -1,0 +1,7 @@
+schema = 1
+id = "zh-cn"
+name = "中文设置与菜单 (zh-CN)"
+version = "0.1.0"
+description = "Tern 简体中文设置中心、快捷键管理与中文命令菜单"
+window = "window.luau"
+styles = ["style.css"]
