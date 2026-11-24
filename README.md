@@ -1,6 +1,6 @@
 # Tern Chinese Plugin (`zh-cn`)
 
-[Tern](https://stencil.so/tern) 简体中文汉化插件（`v0.3.0`）— **全面汉化原生设置弹窗（分类、标题、说明文案、分段选项与操作按钮）、命令面板与标签栏**，并内置覆盖 **322 项设置的交互式中文设置中心**、**中文快捷键管理**与 **223 项中文全功能菜单**。
+[Tern](https://stencil.so/tern) 简体中文汉化插件（`v0.3.1`）— **全面汉化原生设置弹窗（分类、标题、说明文案、分段选项与操作按钮）、命令面板与标签栏**，并向命令面板注入全部 **223 项内置动作中文直达命令**，附带覆盖 **322 项设置的交互式中文设置中心**与**中文快捷键管理**。
 
 A Simplified Chinese (`zh-CN`) localization plugin for [Tern](https://stencil.so/tern) that translates the native Settings dialog (sidebar, all 14 pages, descriptions, segmented options, and action buttons), Command Palette scope tabs, and tab-bar buttons via CSS, alongside an interactive 322-setting Chinese Settings Center, Keybind Manager, and 223-action Chinese Command Menu.
 

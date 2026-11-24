@@ -1,7 +1,7 @@
 schema = 1
 id = "zh-cn"
 name = "中文设置与菜单 (zh-CN)"
-version = "0.3.0"
-description = "Tern 原生设置弹窗（标题/说明/选项/按钮）、命令面板与标签栏简体中文汉化，附带 322 项交互式中文设置中心"
+version = "0.3.1"
+description = "Tern 原生设置弹窗、命令面板（223 项中文直达命令 + 页签/底栏）与标签栏简体中文汉化，附带 322 项交互式中文设置中心"
 window = "window.luau"
 styles = ["style.css"]

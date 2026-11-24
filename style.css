@@ -11,8 +11,17 @@
 .tn-pl-scopes .tn-pl-scope:nth-of-type(2) { font-size: 0; &::before { content: "命令"; font-size: 12px; white-space: nowrap; } }
 .tn-pl-scopes .tn-pl-scope:nth-of-type(3) { font-size: 0; &::before { content: "文件"; font-size: 12px; white-space: nowrap; } }
 .tn-pl-scopes .tn-pl-scope:nth-of-type(4) { font-size: 0; &::before { content: "搜索"; font-size: 12px; white-space: nowrap; } }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(5) { font-size: 0; &::before { content: "分支"; font-size: 12px; white-space: nowrap; } }
+.tn-pl-scopes .tn-pl-scope:nth-of-type(6) { font-size: 0; &::before { content: "提交"; font-size: 12px; white-space: nowrap; } }
 .tn-pl-scopes .tn-pl-scope:nth-of-type(7) { font-size: 0; &::before { content: "会话"; font-size: 12px; white-space: nowrap; } }
 .tn-pl-scopes .tn-pl-scope:nth-of-type(8) { font-size: 0; &::before { content: "主机"; font-size: 12px; white-space: nowrap; } }
+
+#pal .ck-foot {
+  > span { font-size: 0; .kbd { font-size: 11px; } }
+  > span:nth-of-type(1)::after { content: " 选择"; font-size: 12.5px; }
+  > span:nth-of-type(2)::after { content: " 执行"; font-size: 12.5px; }
+  > span.grow::after { content: " 关闭"; font-size: 12.5px; }
+}
 
 button.tb-add > span.lbl { font-size: 0; &::before { content: "新建标签页"; font-size: 13px; white-space: nowrap; } }
 button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-size: 13px; white-space: nowrap; } }
@@ -432,7 +441,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
   }
   section.pf-sec:nth-of-type(6) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "程序原生界面"; font-size: 12.5px; } }
-    .pf-row:nth-of-type(1) {
+    .pf-row:first-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "对话阅读风格"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "支持 TSP 的程序（如 omp）对话记录排版方式"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "阅读"; font-size: 12.5px; white-space: nowrap; } }
@@ -447,36 +456,40 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .t { font-size: 0; &::before { content: "展开思考过程"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "默认展开 AI 的思考内容，不折叠到标题下"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(4) {
+    &:not(:has(.pf-row:nth-of-type(10))) .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "上下文状态条"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在输入编排器上方显示上下文占用状态条"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(5) {
+    &:not(:has(.pf-row:nth-of-type(10))) .pf-row:nth-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "失焦保持输入框展开"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "切换到其他窗格时保持输入框完整展开"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(6) {
+    .pf-row:not(:nth-last-of-type(2)):has(.pf-seg > button:nth-of-type(2):last-of-type) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "输入框渲染模式"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "输入框草稿按纯文本还是渲染后的 Markdown 显示"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "纯文本"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "Markdown"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(7) {
+    .pf-row:not(:first-of-type):has(.pf-seg > button:nth-of-type(3):last-of-type) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "Markdown 标题样式"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "对话中 Markdown 标题的呈现风格"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "标注式以正文大小加粗并带 # 标记；自动模式跟随当前对话阅读风格"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "自动"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "标注式"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "分级字号"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(8) {
+    .pf-row:nth-last-of-type(3):has(.pf-sw) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "代码块自动折行"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "对话回复中的代码块长行自动折行适配宽度；关闭则单行横向滚动"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-last-of-type(2):has(.pf-seg) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "代码编辑对比方式"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "对话中文件修改差异的展示方式"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "原生界面展示文件修改差异的方式；宽度足够时并排模式左右对比新旧内容"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "行内"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "并排"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(9) {
+    .pf-row:last-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "Tab 缩进宽度"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "原生界面代码块与 Diff 中的 Tab 空格数"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "原生界面代码块与 Diff 中每个 Tab 对应的空格列数"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
 }

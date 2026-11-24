@@ -1027,18 +1027,34 @@ tern.command({
 	end,
 })
 
--- 在命令面板注册高频中文直达命令
-for _, item in ipairs(i18n_actions.palette_commands) do
+-- 在原生命令面板全量注册全部 223 项内置命令的中文直达入口
+local group_labels = {}
+for _, g in ipairs(i18n_actions.groups) do
+	group_labels[g.id] = g.label
+end
+
+local action_ids = {}
+for aid in pairs(i18n_actions.actions) do
+	if aid ~= "preferences" then
+		table.insert(action_ids, aid)
+	end
+end
+table.sort(action_ids)
+
+for _, aid in ipairs(action_ids) do
+	local info = i18n_actions.actions[aid]
+	local cmd_id = "zh_" .. string.gsub(aid, "[^a-zA-Z0-9_%-]", "_")
+	local grp_title = "中文 · " .. (group_labels[info.group] or "其他")
 	tern.command({
-		id = item.id,
-		title = item.title,
-		group = item.group,
+		id = cmd_id,
+		title = info.label,
+		group = grp_title,
 		run = function(cx)
 			local ok, err = pcall(function()
-				cx.actions:run(item.action)
+				cx.actions:run(aid)
 			end)
 			if not ok then
-				cx:toast("error", "执行失败: " .. item.title, tostring(err))
+				cx:toast("error", "执行失败: " .. info.label, tostring(err))
 			end
 		end,
 	})
