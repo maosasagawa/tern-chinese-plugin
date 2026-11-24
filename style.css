@@ -1,7 +1,7 @@
-/* Tern 简体中文汉化样式 (v0.3.0)
+/* Tern 简体中文汉化样式 (v0.4.0)
  * - 使用嵌套 CSS 压缩体积，远低于 256 KiB 插件样式上限
- * - 全面汉化原生 Settings 弹窗（导航、14 页标题、说明文案、分段选项、操作按钮）、命令面板页签、标签栏
- * - 跨平台防错位：Keyboard 顶部分组与 Appearance/General/Plugins 使用结构特征或首尾锚点
+ * - 全面适配 Tern 0.9.33：原生 Settings 弹窗（导航、14 页标题、说明文案、分段选项、操作按钮、提示文案）、命令面板页签/底栏、标签栏
+ * - 跨平台防错位：Keyboard 顶部分组、General 底部更新/托管区块与 Appearance/Plugins 使用结构特征或首尾锚点
  */
 
 [data-surface="plugin.zh-cn"] .sf-card, [data-surface="carly"] .sf-card { border-radius: 10px; }
@@ -57,9 +57,10 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > h2.pf-sec-t { font-size: 0; &::before { content: "标签与分屏"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "新建标签与分屏默认启动"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "按下新建标签或分屏快捷键时默认启动的类型（终端 Shell 快捷键始终新建终端，Agent 快捷键始终新建智能体）"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "按下新建标签或分屏快捷键时默认启动的类型，选“每次询问”将弹出类型列表（终端与智能体快捷键始终新建对应类型）"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "终端"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "智能体"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "每次询问"; font-size: 12.5px; white-space: nowrap; } }
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "新建标签起始位置"; font-size: 13.5px; } }
@@ -71,12 +72,27 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .t { font-size: 0; &::before { content: "默认启动目录"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "无目录可继承时新建窗口和会话的初始路径（远程主机在其自身目录启动；留空或目录不存在时使用主目录）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
+    .pf-row:nth-of-type(4) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "焦点越过边缘时切换标签页"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在靠近窗口边缘的窗格继续向外移动焦点时，切换到上一或下一标签页（顶部标签用 ←/→，侧边标签用 ↑/↓）"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(5) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "向左移动焦点进入文件树"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "当文件树面板打开时，在最左侧窗格继续向左移动焦点将直接聚焦文件树"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
   }
   section.pf-sec:nth-of-type(3) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "文本选择"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "选中即复制"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在终端中完成文本选区后自动复制到剪贴板"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(2) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "中键粘贴"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "鼠标中键粘贴最近一次在任意应用中选中的文本；选择“跟随桌面”将遵循系统桌面设置"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "跟随桌面"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "开启"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "关闭"; font-size: 12.5px; white-space: nowrap; } }
     }
   }
   section.pf-sec:nth-of-type(4) {
@@ -145,22 +161,52 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "失焦保存"; font-size: 12.5px; white-space: nowrap; } }
     }
   }
-  section.pf-sec:nth-last-of-type(2) {
-    > h2.pf-sec-t { font-size: 0; &::before { content: "更新"; font-size: 12.5px; } }
+  section.pf-sec:nth-of-type(8):has(.pf-row:first-of-type:last-of-type .pf-sw) {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "系统集成"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
-    }
-    .pf-row:nth-of-type(2) {
-      > .pf-lbl > .t { font-size: 0; &::before { content: "自动检查并下载更新"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "后台自动检测新版本并下载，退出 Tern 时安装"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      > .pf-lbl > .t { font-size: 0; &::before { content: "桌面集成"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "将 Tern 注册到应用菜单、打开方式与默认终端选项，并在 ~/.local/bin 中链接 tern 命令；关闭则移除"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
-  section.pf-sec:last-of-type {
+  section.pf-sec:has(.pf-status.tn-up-line):has(.pf-sw) {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "更新"; font-size: 12.5px; } }
+    .pf-row:nth-last-of-type(2) {
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "从 build.stencil.so 获取新版本，点击“重启并更新”可立即安装"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:last-of-type {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "自动检查并下载更新"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "每小时后台检测新版本并下载，退出 Tern 时安装；关闭则仅手动检查时更新"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+  }
+  section.pf-sec:has(.pf-status.tn-up-line):has(.pf-sw) + section.pf-sec {
     > h2.pf-sec-t { font-size: 0; &::before { content: "omp 助手"; font-size: 12.5px; } }
-    .pf-row:nth-of-type(1) {
+    .pf-row:last-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "由 Tern 自动托管"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "使用内置或托管的 omp 编码助手（关闭则由你自行管理 PATH 中的 omp）"; font-size: 12.5px; line-height: 1.45; display: block; } }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "安装 omp"; font-size: 12.5px; white-space: nowrap; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "由 Tern 从 build.stencil.so 安装并自动更新 omp，并优先加入终端 PATH"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; &::after { content: "安装 omp"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "停止托管"; font-size: 12.5px; white-space: nowrap; } }
+    }
+  }
+  section.pf-sec:has(.pf-status.tn-up-line):has(.pf-sw) + section.pf-sec + section.pf-sec {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "ovnfs 文件系统"; font-size: 12.5px; } }
+    .pf-row:last-of-type {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "由 Tern 自动托管"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "由 Tern 从 build.stencil.so 安装并自动更新 ovnfs，并加入终端 PATH"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; &::after { content: "安装 ovnfs"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "停止托管"; font-size: 12.5px; white-space: nowrap; } }
+    }
+  }
+  section.pf-sec:has(.pf-status.tn-up-line):has(.pf-sw) + section.pf-sec + section.pf-sec + section.pf-sec {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "ABKit 网页引擎"; font-size: 12.5px; } }
+    .pf-row:last-of-type {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "由 Tern 自动托管"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "由 Tern 安装并自动更新 ABKit（用于 omp 浏览器与 Tern 内置网页视图的底层渲染引擎）"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; &::after { content: "安装 ABKit"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "停止托管"; font-size: 12.5px; white-space: nowrap; } }
     }
   }
 }
@@ -203,17 +249,62 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在 Claude 对话界面中展示其思考摘要"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
-  section.pf-sec:nth-of-type(4) {
-    > h2.pf-sec-t { font-size: 0; &::before { content: "自定义智能体"; font-size: 12.5px; } }
+  section.pf-sec:nth-of-type(4):has(.pf-row:nth-of-type(3)) {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "Claude Code"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "命令行工具"; font-size: 13.5px; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "安装"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:nth-of-type(2) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "以 ACP 对话方式打开 Claude Code"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在新 Tern 终端中输入 claude 时自动打开 Tern 对话界面；关闭则运行 Claude Code 原生界面"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(3) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "使用 Claude Code 自带文件与终端工具"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在 ACP 对话中由 Claude Code 自行读写文件与执行命令，而非通过 Tern 执行"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+  }
+  section.pf-sec:nth-of-type(5):has(.pf-row:nth-of-type(3)) {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "Codex"; font-size: 12.5px; } }
+    .pf-row:nth-of-type(1) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "命令行工具"; font-size: 13.5px; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "安装"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:nth-of-type(2) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "以 ACP 对话方式打开 Codex"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在新 Tern 终端中输入 codex 时自动打开 Tern 对话界面；关闭则运行 Codex 原生界面"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(3) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "使用 Codex 自带文件与终端工具"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在 ACP 对话中由 Codex 自行读写文件与执行命令，而非通过 Tern 执行"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+  }
+  section.pf-sec:nth-of-type(6):has(.pf-row:nth-of-type(3)) {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "GitHub Copilot"; font-size: 12.5px; } }
+    .pf-row:nth-of-type(1) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "命令行工具"; font-size: 13.5px; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "安装"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:nth-of-type(2) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "以 ACP 对话方式打开 GitHub Copilot"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在新 Tern 终端中输入 copilot 时自动打开 Tern 对话界面；关闭则运行 GitHub Copilot 原生界面"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(3) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "使用 GitHub Copilot 自带文件与终端工具"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在 ACP 对话中由 GitHub Copilot 自行读写文件与执行命令，而非通过 Tern 执行"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+  }
+  section.pf-sec:nth-last-of-type(2) {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "自定义智能体"; font-size: 12.5px; } }
+    .pf-row:first-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "智能体列表"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "添加自定义的 ACP 智能体（指定 ID、显示名称和启动命令）"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "添加"; font-size: 12.5px; white-space: nowrap; } }
     }
   }
-  section.pf-sec:nth-of-type(5) {
+  section.pf-sec:last-of-type {
     > h2.pf-sec-t { font-size: 0; &::before { content: "MCP 服务器"; font-size: 12.5px; } }
-    .pf-row:nth-of-type(1) {
+    .pf-row:first-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "服务器列表"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "为 Tern 内置智能体会话注入的 MCP 工具服务器"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "添加"; font-size: 12.5px; white-space: nowrap; } }
@@ -225,10 +316,11 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
   h1.pf-title { font-size: 0; &::before { content: "外观"; font-size: 22px; } }
   section.pf-sec:nth-of-type(1) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "配色主题"; font-size: 12.5px; } }
-    .pf-row:nth-of-type(1) {
+    .pf-row:last-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "主题同步状态"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "未单独固定深浅色主题时，自动跟随 omp 的 config.yml 主题配置"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
+    .tn-pf-hint { font-size: 0; &::before { content: "悬停主题卡片可实时预览，点击即可选用；按住卡片可全窗口预览该主题效果。"; font-size: 12px; line-height: 16px; display: block; } }
   }
   section.pf-sec:nth-of-type(2) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "外观与字体"; font-size: 12.5px; } }
@@ -391,8 +483,8 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     .pf-row:nth-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "界面密度"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "紧凑直角分屏或带圆角边距的岛屿卡片风格"; font-size: 12.5px; line-height: 1.45; display: block; } }
-      .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "紧凑"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "岛屿"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "岛屿"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "紧凑"; font-size: 12.5px; white-space: nowrap; } }
     }
     .pf-row:nth-of-type(6) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "标签栏位置"; font-size: 13.5px; } }
@@ -408,6 +500,14 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .t { font-size: 0; &::before { content: "滚轮滚动侧边栏切标签"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在垂直标签栏上滚动滚轮直接切换上一/下一标签页"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
+    .pf-row:nth-of-type(9) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "跨会话统一编号侧边标签"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "将垂直侧边栏中所有会话的标签页统一按顺序编号，使快捷键数字始终指向固定标签；关闭则按各会话分别编号"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-last-of-type(2) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "系统原生标题栏与窗口按钮"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "使用操作系统原生的标题栏或窗口控制按钮，替代 Tern 在标签栏内自绘的控制按钮"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
     .pf-row:last-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "自定义程序图标"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在标签页与窗格卡片上替换特定程序的默认图标"; font-size: 12.5px; line-height: 1.45; display: block; } }
@@ -422,11 +522,16 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "分屏时"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "始终"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(2) {
-      > .pf-lbl > .t { font-size: 0; &::before { content: "底部组件"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "窗口底部状态组件栏显示的内容列表"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    .pf-row:nth-of-type(2):not(:has(.btn.sm)) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "淡化非聚焦窗格"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "分屏时为非聚焦窗格叠加柔暗蒙层以突出当前焦点；设为关闭则所有窗格保持相同亮度"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(3) {
+    .pf-row:nth-last-of-type(3) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "底部组件"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "窗口底部状态栏显示的组件（当前目录、分支、上次命令、系统指标、AI 用量等）"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "编辑组件…"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:nth-last-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "组件栏外观"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "底部状态组件的视觉样式"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "简约"; font-size: 12.5px; white-space: nowrap; } }
@@ -434,54 +539,71 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "描边"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(4) { font-size: 0; &::after { content: "分隔"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(4) {
+    .pf-row:last-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "原生 tmux 状态栏"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "将窗格内运行的 tmux 状态栏渲染为 Tern 原生外观"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
   section.pf-sec:nth-of-type(6) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "程序原生界面"; font-size: 12.5px; } }
-    .pf-row:first-of-type {
+    .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "对话阅读风格"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "支持 TSP 的程序（如 omp）对话记录排版方式"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "阅读"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "时间线"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "控制台"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(2) {
+    .pf-row:nth-of-type(2):has(.pf-seg) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "时间线列宽"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "Spine 时间线风格的对话栏宽度：标准为居中窄栏，宽栏更舒展，全宽铺满整个窗格"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "标准"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "宽栏"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "全宽"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:nth-of-type(3):has(.pf-seg) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "omp 设置打开方式"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在 omp 中执行 /settings 时的打开形态：覆盖窗格的独立弹窗，或贴在对话旁的侧栏"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "独立弹窗"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "对话侧栏"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "折叠工具调用"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "将连续的工具调用和思考过程折叠到单行摘要"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(3) {
+    .pf-row:nth-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "展开思考过程"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "默认展开 AI 的思考内容，不折叠到标题下"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    &:not(:has(.pf-row:nth-of-type(10))) .pf-row:nth-of-type(4) {
+    .pf-row:nth-of-type(6) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "上下文状态条"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在输入编排器上方显示上下文占用状态条"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    &:not(:has(.pf-row:nth-of-type(10))) .pf-row:nth-of-type(5) {
+    .pf-row:nth-of-type(7) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "失焦保持输入框展开"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "切换到其他窗格时保持输入框完整展开"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:not(:nth-last-of-type(2)):has(.pf-seg > button:nth-of-type(2):last-of-type) {
+    .pf-row:nth-of-type(8) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "智能体任务托盘"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "将 omp 正在运行的子智能体与后台任务以托盘卡片形式显示在输入框上方；关闭则仅显示计数摘要"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-last-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "输入框渲染模式"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "输入框草稿按纯文本还是渲染后的 Markdown 显示"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "纯文本"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "Markdown"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:not(:first-of-type):has(.pf-seg > button:nth-of-type(3):last-of-type) {
+    .pf-row:nth-last-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "Markdown 标题样式"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "标注式以正文大小加粗并带 # 标记；自动模式跟随当前对话阅读风格"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "自动"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "标注式"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "分级字号"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-last-of-type(3):has(.pf-sw) {
+    .pf-row:nth-last-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "代码块自动折行"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "对话回复中的代码块长行自动折行适配宽度；关闭则单行横向滚动"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-last-of-type(2):has(.pf-seg) {
+    .pf-row:nth-last-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "代码编辑对比方式"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "原生界面展示文件修改差异的方式；宽度足够时并排模式左右对比新旧内容"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "行内"; font-size: 12.5px; white-space: nowrap; } }
@@ -941,189 +1063,248 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > h2.pf-sec-t { font-size: 0; &::before { content: "常规"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "默认目录策略"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "新建数据库和打开数据库对话框启动时的默认目录策略"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "指定文件夹"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "选择“始终使用此位置”或“每次启动使用此位置”时的默认目录路径"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; &::after { content: "选择…"; font-size: 12.5px; white-space: nowrap; } }
     }
     .pf-row:nth-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "最近打开文件上限"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "“打开最近使用”菜单中保留的数据库条目数量"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "只读模式快捷键打开最近项"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "Ctrl+Alt+Shift+1–9 以反转只读状态的方式打开最近数据库（对应 Ctrl+1–9）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "恢复会话时重新打开数据库"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "恢复的数据库块自动重新打开文件；关闭则等待手动点击打开"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(6) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "保存项目时询问 SQL 标签页"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "保存项目时提示是否将各个 SQL 标签页的脚本一并保存在项目内"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
   section.pf-sec:nth-of-type(2) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "数据库文件类型"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "支持的文件后缀"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "打开与保存对话框提供的文件类型筛选器（多个通配符以空格分隔）"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; &::after { content: "添加"; font-size: 12.5px; white-space: nowrap; } }
     }
   }
   section.pf-sec:nth-of-type(3) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "数据库行为"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "新建库默认编码"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "新建数据库默认采用的文本字符编码"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "启用外键约束"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "打开数据库时自动开启外键约束检查 (PRAGMA foreign_keys)"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "结构树单行显示建表语句"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在结构树中移除 CREATE 语句内的换行符，按单行显示"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "每页预取行数"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "数据浏览器每次预加载的数据行批次大小"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "新建字段默认类型"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在“编辑表结构”中新增字段时的默认数据类型"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(6) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "结构树字号"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "标准字号下的结构树文本大小（随 Tern 主字号等比缩放）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(7) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "自动刷新只读数据库"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "以只读方式打开的数据库在磁盘文件变化时自动重载"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(8) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "跳过未知排序规则询问"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "遇到 SQLite 不识别的排序规则时不再弹窗询问，自动以长度优先替代排序"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(9) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "打开后自动执行 SQL"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "对以可写模式打开的每个数据库自动执行此 SQL（如 PRAGMA 语句）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
   section.pf-sec:nth-of-type(4) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "数据浏览器"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "网格字体"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "数据表格使用的字体家族（留空使用 Tern 默认等宽字体）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "网格字号"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "表格与单元格编辑器文字大小（随 UI 字号等比缩放）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "最大查询行数"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "单张表或查询在表格视图中最多展示的行数"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "单元格显示字符上限"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "单元格内截断省略前最多显示的字符数"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "过滤补全与汇总行数上限"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "超过此行数后停止列筛选补全和底部汇总统计计算"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(6) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "图片单元格预览"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "直接在表格单元格内渲染缩略预览包含图片的二进制数据"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(7) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "单元格自动换行"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "允许较长的单元格文本在单元内折为多行显示"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(8) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "过滤防抖延迟"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "停止输入过滤条件后等待应用筛选的毫秒数"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(9) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "过滤转义字符"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在筛选框中输入 % 或 _ 前放置此转义符以按字面字符匹配"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(10) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "NULL 占位文本"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "空值 (NULL) 单元格中显示的提示文字"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(11) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "BLOB 占位文本"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "二进制数据 (BLOB) 单元格中显示的提示文字"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
   section.pf-sec:nth-of-type(5) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "单元格配色"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "NULL 单元格"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "文字与背景十六进制颜色 (#rrggbb)，留空使用主题默认色"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "BLOB 单元格"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "文字与背景十六进制颜色 (#rrggbb)，留空使用主题默认色"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "普通单元格"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "文字与背景十六进制颜色 (#rrggbb)，留空使用主题默认色"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "格式化单元格"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "文字与背景十六进制颜色 (#rrggbb)，留空使用主题默认色"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
   section.pf-sec:nth-of-type(6) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "编辑单元格"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "紧凑缩进 JSON/XML"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "格式化 JSON 与 XML 时采用较少的缩进空格"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "排序 JSON 键名"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "格式化 JSON 时按字母顺序排列对象的键名"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "自动切换编辑模式"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "根据单元格内容自动切换纯文本、JSON、XML 或图片视图"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "编辑器自动折行"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在单元格编辑器中自动折行显示长行文本"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
   section.pf-sec:nth-of-type(7) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "从结构拖拽生成 SQL"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "生成 SELECT 查询"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "拖放数据表或字段时生成 SELECT 查询语句"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "生成 INSERT 语句"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "拖放数据表或字段时生成 INSERT 插入语句"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "带 Schema 限定名"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "生成表名时附带 schema 限定前缀（如 main.users）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "标识符加引号"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "按下方 SQL 编辑器设置的引号规则为生成的表名和列名加引号"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
   section.pf-sec:nth-of-type(8) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "SQL 编辑器"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "编辑器字体"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "SQL 编辑器的字体家族（留空使用 Tern 默认等宽字体）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "编辑器字号"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "SQL 编辑器正文默认字号（随 UI 字号等比缩放）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "查询结果字号"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "查询消息与 SQL 日志面板文字大小（随 Tern 主字号等比缩放）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "Tab 宽度"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "每个制表符 (Tab) 对应的空格列数"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "使用 Tab 缩进"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "按 Tab 键时插入真实制表符；关闭则插入对应数量的空格"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(6) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "长行折行模式"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "SQL 编辑器中超长文本行的自动折行方式"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(7) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "标识符引号风格"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "自动生成 SQL 语句时为表名与列名包裹的引号样式"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(8) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "SQL 代码补全"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "键入 SQL 时自动弹出关键字、表名与列名补全建议"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(9) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "关键字大小写"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "代码补全插入 SQL 关键字时采用的大小写风格"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "大写 SELECT"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "小写 select"; font-size: 12.5px; white-space: nowrap; } }
     }
     .pf-row:nth-of-type(10) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "标记出错 SQL 语句"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "执行出错时在编辑器中标出失败的 SQL 语句位置"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(11) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "编辑器与结果左右并排"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "开启后 SQL 编辑器与查询结果左右并列；关闭则结果放在下方"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
     .pf-row:nth-of-type(12) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "标签页显示关闭按钮"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "在每个 SQL 查询标签页上直接显示关闭按钮"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
   section.pf-sec:nth-of-type(9) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "扩展与函数"; font-size: 12.5px; } }
-    .pf-row:nth-of-type(1) {
+    .pf-row:first-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "自动加载扩展库"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "每次打开数据库时自动加载的 SQLite 扩展库列表"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; &::after { content: "添加…"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(2) {
+    .pf-row:nth-last-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "禁用 REGEXP 函数"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "不在数据库上注册内置 REGEXP 函数，以便由外部扩展提供自定义实现"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(3) {
+    .pf-row:last-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "允许 SQL 调用 load_extension"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "允许在 SQL 语句中执行 load_extension()；仅建议对完全信任的数据库开启"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
   }
 }
@@ -1235,6 +1416,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
 
 .pf-nav:has(.pf-group:nth-of-type(1) .nav-row:nth-of-type(9).on) + .pf-scroll .pf-doc {
   h1.pf-title { font-size: 0; &::before { content: "快捷键"; font-size: 22px; } }
+  .tn-pf-hint { font-size: 0; &::before { content: "将鼠标悬停在下方任意命令上：点击 + 录制快捷键，点击按键上的 × 移除绑定；连续按键可组成按键序列，单独轻按修饰键（如双击 Ctrl / ⌘）也可绑定。"; font-size: 12px; line-height: 16px; display: block; } }
   section.pf-sec:first-of-type:not(:has(.pf-seg)):not(:has(.pf-sw)) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "全局热键"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
@@ -1385,6 +1567,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     .pf-row:nth-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "面板默认宽度"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "图谱各列与详情检查面板的默认宽度（px）"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "重置宽度"; font-size: 12.5px; white-space: nowrap; } }
     }
   }
   section.pf-sec:nth-of-type(5) {
@@ -1410,6 +1593,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     .pf-row:nth-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "复制公钥"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "将上述公钥文件内容复制到剪贴板"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "复制"; font-size: 12.5px; white-space: nowrap; } }
     }
   }
   section.pf-sec:nth-of-type(8) {
@@ -1439,7 +1623,8 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     }
     .pf-row:nth-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "测试启动"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "测试外部编辑器命令是否可以正常拉起"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "聚焦本机 Git 块或终端后点击以测试外部编辑器命令"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "打开编辑器"; font-size: 12.5px; white-space: nowrap; } }
     }
   }
   section.pf-sec:nth-of-type(10) {
@@ -1525,15 +1710,15 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
   h1.pf-title { font-size: 0; &::before { content: "会话"; font-size: 22px; } }
   section.pf-sec:nth-of-type(1) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "后台守护进程"; font-size: 12.5px; } }
-    .pf-row:nth-of-type(1) {
+    .pf-row:nth-last-of-type(3) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "开机自启守护进程"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "登录系统时自动启动会话守护进程，关闭窗口后终端内的程序仍保持后台运行"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(2) {
+    .pf-row:nth-last-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "显示系统托盘图标"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "守护进程运行时在系统托盘/菜单栏显示图标"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(3) {
+    .pf-row:last-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "Socket 路径"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "当前会话守护进程的本地 Unix Socket / 管道路径"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
@@ -1541,8 +1726,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
   section.pf-sec:nth-of-type(2) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "当前窗口"; font-size: 12.5px; } }
     .pf-row:nth-of-type(1) {
-      > .pf-lbl > .t { font-size: 0; &::before { content: "多会话视图"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "管理当前与后台保留的终端会话"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      > .pf-lbl > .t { font-size: 0; &::before { content: "当前会话概览"; font-size: 13.5px; } }
       .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "切换会话…"; font-size: 12.5px; white-space: nowrap; } }
     }
     .pf-row:nth-of-type(2) {
@@ -1568,6 +1752,10 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "运行程序时"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "始终"; font-size: 12.5px; white-space: nowrap; } }
     }
+    .pf-row:nth-of-type(2) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "自动关闭空会话"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "当会话中最后一个标签页关闭或移走时自动关闭该空会话，并将窗口切回上一会话"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
   }
 }
 
@@ -1589,7 +1777,47 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     }
   }
   section.pf-sec:nth-of-type(3) {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "连接通知"; font-size: 12.5px; } }
+    .pf-row:nth-of-type(1) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "连接状态通知"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "当远程主机无法连接或中途断开时发送提示；关闭或在某台主机旁点击静音后，仅在状态栏显示"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+  }
+  section.pf-sec:nth-of-type(4) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "主机指纹密钥"; font-size: 12.5px; } }
+  }
+  section.pf-sec:nth-of-type(5) {
+    > h2.pf-sec-t { font-size: 0; &::before { content: "云端环境 (Cloud)"; font-size: 12.5px; } }
+    .pf-row:nth-of-type(1) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "云端服务商"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "执行“发送到云端”时负责运行云端机器的服务提供方"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "Stencil 云端"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "自托管"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:nth-of-type(2) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "云端机器规格"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "发送到云端时默认申请的 CPU 与内存配置"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(3) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "闲置自动暂停"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "云端机器空闲超过该时长后自动暂停，再次打开时自动恢复"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(4) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "同步 AI 模型登录凭据"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "让云端机器上的智能体直接使用你的模型登录态（部分轮换令牌的服务商可能会使本机登出）"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(5) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "同步 GitHub 登录凭据"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "将本机 gh（或 git credential）令牌同步到云端，方便执行 clone、push 与 gh 命令"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(6) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "同时同步忽略文件"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "匹配以下 glob 规则的 Git 忽略文件也会一并发送到云端"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
+    .pf-row:nth-of-type(7) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "环境快照重建周期"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "超过该时长的自托管环境快照将在下次发送后自动重建"; font-size: 12.5px; line-height: 1.45; display: block; } }
+    }
   }
 }
 
@@ -1597,7 +1825,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
   h1.pf-title { font-size: 0; &::before { content: "高级"; font-size: 22px; } }
   section.pf-sec:nth-of-type(1) {
     > h2.pf-sec-t { font-size: 0; &::before { content: "图形渲染"; font-size: 12.5px; } }
-    .pf-row:nth-of-type(1) {
+    .pf-row:first-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "渲染后端"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "下次启动 Tern 时使用的图形绘制后端"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "自动"; font-size: 12.5px; white-space: nowrap; } }
@@ -1605,15 +1833,14 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "集成显卡"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(4) { font-size: 0; &::after { content: "CPU 软件"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(2) {
+    .pf-row:nth-last-of-type(6) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "当前绘制设备"; font-size: 13.5px; } }
-      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "当前窗口实际正在使用的 GPU/图形适配器与后端接口"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(3) {
+    .pf-row:nth-last-of-type(5) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "图形抗锯齿"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "对界面矢量边缘进行抗锯齿平滑渲染"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(4) {
+    .pf-row:nth-last-of-type(4) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "多重采样 (MSAA)"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "GPU 多重采样抗锯齿倍率"; font-size: 12.5px; line-height: 1.45; display: block; } }
       .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "关闭"; font-size: 12.5px; white-space: nowrap; } }
@@ -1621,11 +1848,19 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "4×"; font-size: 12.5px; white-space: nowrap; } }
       .pf-seg > button:nth-of-type(4) { font-size: 0; &::after { content: "8×"; font-size: 12.5px; white-space: nowrap; } }
     }
-    .pf-row:nth-of-type(5) {
+    .pf-row:nth-last-of-type(3) {
+      > .pf-lbl > .t { font-size: 0; &::before { content: "帧率上限"; font-size: 13.5px; } }
+      > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "Tern 每秒绘制的最高帧数；在高刷新率显示器上适当降低可明显省电"; font-size: 12.5px; line-height: 1.45; display: block; } }
+      .pf-seg > button:nth-of-type(1) { font-size: 0; &::after { content: "跟随显示器"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(2) { font-size: 0; &::after { content: "120"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(3) { font-size: 0; &::after { content: "60"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-seg > button:nth-of-type(4) { font-size: 0; &::after { content: "30"; font-size: 12.5px; white-space: nowrap; } }
+    }
+    .pf-row:nth-last-of-type(2) {
       > .pf-lbl > .t { font-size: 0; &::before { content: "垂直同步 (VSync)"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "同步显示器刷新率输出画面；关闭可降低延迟但可能撕裂"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }
-    .pf-row:nth-of-type(6) {
+    .pf-row:last-of-type {
       > .pf-lbl > .t { font-size: 0; &::before { content: "GPU 排队帧数"; font-size: 13.5px; } }
       > .pf-lbl > .h { font-size: 0; & > * { font-size: 0; } &::before { content: "GPU 允许提前排队的显示帧缓冲数量（1–3）"; font-size: 12.5px; line-height: 1.45; display: block; } }
     }

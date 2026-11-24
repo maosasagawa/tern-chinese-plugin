@@ -1,4 +1,4 @@
--- Tern 0.9.18 全部 223 项内置菜单命令的简体中文分组、译名与高频命令面板入口
+-- Tern 0.9.33 全部 241 项内置菜单命令的简体中文分组、译名与高频命令面板入口
 
 local M = {}
 
@@ -19,6 +19,8 @@ M.actions = {
 	["new_tab"] = { group = "tabs", label = "新建标签页" },
 	["new_window"] = { group = "tabs", label = "新建窗口" },
 	["close_tab"] = { group = "tabs", label = "关闭当前标签页" },
+	["reopen_closed_tab"] = { group = "tabs", label = "重新打开最近关闭的标签页" },
+	["move_tab_to_window"] = { group = "tabs", label = "移动标签页到其他窗口…" },
 	["rename_tab"] = { group = "tabs", label = "重命名当前标签页…" },
 	["tidy_tab_title"] = { group = "tabs", label = "整理当前标签页标题" },
 	["next_tab"] = { group = "tabs", label = "切换到下一个标签页" },
@@ -34,6 +36,7 @@ M.actions = {
 	["switch_session"] = { group = "tabs", label = "切换会话…" },
 	["new_session"] = { group = "tabs", label = "新建会话" },
 	["rename_session"] = { group = "tabs", label = "重命名当前会话…" },
+	["copy_session_link"] = { group = "tabs", label = "复制当前会话链接" },
 	["lock_session"] = { group = "tabs", label = "锁定/解锁当前会话" },
 	["close_session"] = { group = "tabs", label = "关闭当前会话" },
 	["move_session_up"] = { group = "tabs", label = "上移当前会话" },
@@ -56,6 +59,8 @@ M.actions = {
 	["move_pane:down"] = { group = "panes", label = "将窗格向下移动" },
 	["move_pane_to_tab"] = { group = "panes", label = "移动窗格到其他标签页…" },
 	["move_pane_to_session"] = { group = "panes", label = "移动窗格到其他会话…" },
+	["move_pane_to_window"] = { group = "panes", label = "移动窗格到其他窗口…" },
+	["record_pane"] = { group = "panes", label = "录制当前窗格 (Asciinema)" },
 	["park_pane"] = { group = "panes", label = "停靠当前窗格到底部" },
 	["parked_panes"] = { group = "panes", label = "查看已停靠窗格" },
 	["pip"] = { group = "panes", label = "切换画中画模式 (PiP)" },
@@ -100,6 +105,7 @@ M.actions = {
 
 	-- 终端、剪贴板与滚动
 	["find"] = { group = "terminal", label = "在终端历史中查找…" },
+	["select_all"] = { group = "terminal", label = "全选当前内容" },
 	["copy"] = { group = "terminal", label = "复制选中内容" },
 	["paste"] = { group = "terminal", label = "粘贴剪贴板内容" },
 	["paste_selection"] = { group = "terminal", label = "粘贴主选区内容" },
@@ -146,6 +152,7 @@ M.actions = {
 	["pane_headers:split"] = { group = "appearance", label = "窗格标题栏：仅分屏时显示" },
 	["pane_headers:always"] = { group = "appearance", label = "窗格标题栏：始终显示" },
 	["edit_widgets"] = { group = "appearance", label = "编辑底部状态栏组件…" },
+	["toggle_widget_bar"] = { group = "appearance", label = "显示/隐藏底部组件栏" },
 	["widget_look:plain"] = { group = "appearance", label = "状态组件样式：简约" },
 	["widget_look:pills"] = { group = "appearance", label = "状态组件样式：胶囊" },
 	["widget_look:outline"] = { group = "appearance", label = "状态组件样式：描边" },
@@ -164,6 +171,9 @@ M.actions = {
 	["files_toggle_hidden"] = { group = "files", label = "文件树：显示/隐藏隐藏文件" },
 	["open_file"] = { group = "files", label = "打开文件…" },
 	["search_project"] = { group = "files", label = "在项目中搜索文本…" },
+	["review_changes"] = { group = "files", label = "审查文件变更" },
+	["files_upload"] = { group = "files", label = "文件：上传文件到远程目录…" },
+	["files_download"] = { group = "files", label = "文件：下载文件到本机" },
 	["browse_folder"] = { group = "files", label = "浏览文件夹…" },
 	["new_note"] = { group = "files", label = "新建笔记" },
 	["session_note"] = { group = "files", label = "打开当前会话笔记" },
@@ -189,6 +199,7 @@ M.actions = {
 	["carly"] = { group = "prompt_ai", label = "询问 Carly AI 助手…" },
 	["carly_new_conversation"] = { group = "prompt_ai", label = "Carly：开始新对话" },
 	["carly_tasks"] = { group = "prompt_ai", label = "Carly：查看定时任务" },
+	["send_selection_to_agent"] = { group = "prompt_ai", label = "将选中文本发送给智能体" },
 	["native_surfaces"] = { group = "prompt_ai", label = "切换原生程序界面 (TSP)" },
 	["surface_headings:auto"] = { group = "prompt_ai", label = "Markdown 标题：自动" },
 	["surface_headings:annotated"] = { group = "prompt_ai", label = "Markdown 标题：标注式" },
@@ -222,6 +233,7 @@ M.actions = {
 
 	-- 远程主机与云端环境
 	["switch_host"] = { group = "remote", label = "切换远程主机…" },
+	["switch_host_window"] = { group = "remote", label = "切换远程主机窗口…" },
 	["add_remote_host"] = { group = "remote", label = "添加远程主机…" },
 	["connect_mobile"] = { group = "remote", label = "从手机端扫码连接…" },
 	["new_session_on_host"] = { group = "remote", label = "在指定主机新建会话…" },
@@ -254,6 +266,13 @@ M.actions = {
 	["restart_to_update"] = { group = "system", label = "重启并应用更新" },
 	["restart_tern"] = { group = "system", label = "重启 Tern 客户端" },
 	["restart_session_daemon"] = { group = "system", label = "重启会话守护进程 (Daemon)" },
+	["macos_permissions"] = { group = "system", label = "配置 macOS 系统权限" },
+	["install_ovnfs"] = { group = "system", label = "安装 ovnfs" },
+	["check_ovnfs_updates"] = { group = "system", label = "检查 ovnfs 更新" },
+	["stop_managing_ovnfs"] = { group = "system", label = "停止由 Tern 托管 ovnfs" },
+	["install_abkit"] = { group = "system", label = "安装 ABKit" },
+	["check_abkit_updates"] = { group = "system", label = "检查 ABKit 更新" },
+	["stop_managing_abkit"] = { group = "system", label = "停止由 Tern 托管 ABKit" },
 	["quit"] = { group = "system", label = "退出 Tern" },
 }
 
