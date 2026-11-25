@@ -20,6 +20,36 @@ local PAGE_SIZE = 12
 local KV_OVERRIDE_KEY = "override_preferences"
 
 local desc_cache = {}
+local desc_warm_started = false
+
+local function ensure_desc_warm(cx)
+	if desc_warm_started then
+		return
+	end
+	desc_warm_started = true
+	local raw_list = cx.settings:list()
+	local keys = {}
+	for k in pairs(raw_list) do
+		if not desc_cache[k] then
+			table.insert(keys, k)
+		end
+	end
+	local idx = 1
+	local function warm_batch(ncx)
+		local c = ncx or cx
+		local stop = math.min(#keys, idx + 49)
+		while idx <= stop do
+			get_desc(c, keys[idx])
+			idx += 1
+		end
+		if idx <= #keys then
+			tern.timer(10, warm_batch)
+		end
+	end
+	if #keys > 0 then
+		tern.timer(10, warm_batch)
+	end
+end
 
 local state = {
 	pane = nil,
@@ -564,6 +594,7 @@ local function build_view(cx)
 end
 
 local function refresh_canvas(cx)
+	ensure_desc_warm(cx)
 	local view, dock = build_view(cx)
 	if state.pane ~= nil then
 		local existing = cx.canvas:get(state.pane)
@@ -1070,28 +1101,4 @@ tern.override("preferences", function(cx)
 	return true
 end)
 
--- 分批预热设置描述缓存，避免首次打开设置时超出 50ms 单次切片预算
-tern.on("window_start", function(cx)
-	local raw_list = cx.settings:list()
-	local keys = {}
-	for k in pairs(raw_list) do
-		if not desc_cache[k] then
-			table.insert(keys, k)
-		end
-	end
-	local idx = 1
-	local function warm_batch(ncx)
-		local c = ncx or cx
-		local stop = math.min(#keys, idx + 49)
-		while idx <= stop do
-			get_desc(c, keys[idx])
-			idx += 1
-		end
-		if idx <= #keys then
-			tern.timer(10, warm_batch)
-		end
-	end
-	if #keys > 0 then
-		tern.timer(10, warm_batch)
-	end
-end)
+-- 按需在首次打开中文设置中心时通过 ensure_desc_warm() 预热描述缓存，避免窗口启动期无谓计算
