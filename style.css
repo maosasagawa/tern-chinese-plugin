@@ -1,14 +1,15 @@
-/* Tern 简体中文汉化样式 (v0.4.2)
+/* Tern 简体中文汉化样式 (v0.4.3)
  * - 使用嵌套 CSS 压缩体积，远低于 256 KiB 插件样式上限
  * - 性能优化：收窄 :has() 与直接子代选择器作用域、合并公共排版规则，并跳过快捷键列表 (.pf-key) 无效匹配
  * - 全面适配 Tern 0.9.33：原生 Settings 弹窗（导航、14 页标题、说明文案、分段选项、操作按钮、提示文案）、命令面板页签/底栏、标签栏
  * - 跨平台防错位：Keyboard 顶部分组、General Windows 缺失 Browser/System 时的 Files/Saving 锚点、Terminal 缺失 Three-finger swipes 锚点与远程主机 .pf-seg.tn-at 隔离
+ * - 适配 Tern 0.9.37 (v0.4.3)：font-size: 0 不再隐藏原文，改用 visibility / 透明文字隐藏英文，修复中英文重叠与分段按钮选中态消失
  */
 
 [data-surface="plugin.zh-cn"] .sf-card, [data-surface="carly"] .sf-card { border-radius: 10px; }
 .zh-cn-muted { color: var(--t3); }
 
-.tn-pl-scopes > .tn-pl-scope { font-size: 0; &::before { font-size: 12px; white-space: nowrap; } }
+.tn-pl-scopes > .tn-pl-scope { font-size: 0; visibility: hidden; &::before { font-size: 12px; visibility: visible; display: inline-block; white-space: nowrap; } }
 .tn-pl-scopes > .tn-pl-scope:nth-of-type(1)::before { content: "全部"; }
 .tn-pl-scopes > .tn-pl-scope:nth-of-type(2)::before { content: "命令"; }
 .tn-pl-scopes > .tn-pl-scope:nth-of-type(3)::before { content: "文件"; }
@@ -19,18 +20,18 @@
 .tn-pl-scopes > .tn-pl-scope:nth-of-type(8)::before { content: "主机"; }
 
 #pal .ck-foot {
-  > span { font-size: 0; .kbd { font-size: 11px; } }
-  > span:nth-of-type(1)::after { content: " 选择"; font-size: 12.5px; }
-  > span:nth-of-type(2)::after { content: " 执行"; font-size: 12.5px; }
-  > span.grow::after { content: " 关闭"; font-size: 12.5px; }
+  > span { font-size: 0; visibility: hidden; .kbd { font-size: 11px; visibility: visible; } }
+  > span:nth-of-type(1)::after { content: " 选择"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: pre; }
+  > span:nth-of-type(2)::after { content: " 执行"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: pre; }
+  > span.grow::after { content: " 关闭"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: pre; }
 }
 
-button.tb-add > span.lbl { font-size: 0; &::before { content: "新建标签页"; font-size: 13px; white-space: nowrap; } }
-button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-size: 13px; white-space: nowrap; } }
+button.tb-add > span.lbl { font-size: 0; visibility: hidden; &::before { content: "新建标签页"; font-size: 13px; visibility: visible; display: inline-block; white-space: nowrap; } }
+button.tb-files > span.lbl { font-size: 0; visibility: hidden; &::before { content: "文件"; font-size: 13px; visibility: visible; display: inline-block; white-space: nowrap; } }
 
-.pf-brand > .pf-name { font-size: 0; &::before { content: "设置"; font-size: 14px; font-weight: 600; } }
-.pf-groups > .pf-group > .nav-head { font-size: 0; &::before { font-size: 12.5px; } }
-.pf-groups > .pf-group > .pf-items > .nav-row > .pf-txt > .lbl { font-size: 0; &::before { font-size: 13.5px; } }
+.pf-brand > .pf-name { font-size: 0; visibility: hidden; &::before { content: "设置"; font-size: 14px; visibility: visible; display: inline-block; font-weight: 600; } }
+.pf-groups > .pf-group > .nav-head { font-size: 0; visibility: hidden; &::before { font-size: 12.5px; visibility: visible; display: inline-block;  } }
+.pf-groups > .pf-group > .pf-items > .nav-row > .pf-txt > .lbl { font-size: 0; visibility: hidden; &::before { font-size: 13.5px; visibility: visible; display: inline-block;  } }
 .pf-groups > .pf-group:nth-of-type(1) > .nav-head::before { content: "应用"; }
 .pf-groups > .pf-group:nth-of-type(2) > .nav-head::before { content: "系统"; }
 .pf-groups > .pf-group:nth-of-type(1) > .pf-items > .nav-row:nth-of-type(1) > .pf-txt > .lbl::before { content: "常规"; }
@@ -48,17 +49,17 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
 .pf-groups > .pf-group:nth-of-type(2) > .pf-items > .nav-row:nth-of-type(2) > .pf-txt > .lbl::before { content: "主机"; }
 .pf-groups > .pf-group:nth-of-type(2) > .pf-items > .nav-row:nth-of-type(3) > .pf-txt > .lbl::before { content: "高级"; }
 
-.pf-seg.tn-at > button { font-size: 0; &::after { font-size: 11px; white-space: nowrap; } }
+.pf-seg.tn-at > button { font-size: 0; color: transparent; &::after { font-size: 11px; visibility: visible; display: inline-block; white-space: nowrap; } }
 .pf-seg.tn-at > button:nth-of-type(1)::after { content: "客户端"; }
 .pf-seg.tn-at > button:nth-of-type(2)::after { content: "远程主机"; }
 
-.pf.sheet > .pf-nav:has(> .pf-groups > .pf-group > .pf-items > .nav-row.on) + .pf-scroll > .pf-doc > header.pf-head > h1.pf-title { font-size: 0; &::before { font-size: 22px; } }
+.pf.sheet > .pf-nav:has(> .pf-groups > .pf-group > .pf-items > .nav-row.on) + .pf-scroll > .pf-doc > header.pf-head > h1.pf-title { font-size: 0; visibility: hidden; &::before { font-size: 22px; visibility: visible; display: inline-block;  } }
 
 .pf-doc {
-  > section.pf-sec > h2.pf-sec-t { font-size: 0; &::before { font-size: 12.5px; } }
-  > section.pf-sec > .pf-rows > .pf-row:not(.pf-key) > .pf-lbl > .t { font-size: 0; &::before { font-size: 13.5px; } }
-  > section.pf-sec > .pf-rows > .pf-row:not(.pf-key) > .pf-lbl > .h { font-size: 0; &::before { font-size: 12.5px; line-height: 1.45; display: block; } }
-  > section.pf-sec > .pf-rows > .pf-row:not(.pf-key) .pf-seg:not(.tn-at) > button { font-size: 0; &::after { font-size: 12.5px; white-space: nowrap; } }
+  > section.pf-sec > h2.pf-sec-t { font-size: 0; visibility: hidden; &::before { font-size: 12.5px; visibility: visible; display: inline-block;  } }
+  > section.pf-sec > .pf-rows > .pf-row:not(.pf-key) > .pf-lbl > .t { font-size: 0; visibility: hidden; &::before { font-size: 13.5px; visibility: visible; display: inline-block;  } }
+  > section.pf-sec > .pf-rows > .pf-row:not(.pf-key) > .pf-lbl > .h { font-size: 0; visibility: hidden; &::before { font-size: 12.5px; visibility: visible; display: inline-block; line-height: 1.45; display: block; } }
+  > section.pf-sec > .pf-rows > .pf-row:not(.pf-key) .pf-seg:not(.tn-at) > button { font-size: 0; color: transparent; &::after { font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(1) > .pf-items > .nav-row:nth-of-type(1).on) + .pf-scroll > .pf-doc {
@@ -92,6 +93,10 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(4) {
       > .pf-lbl > .t::before { content: "焦点越过边缘时切换标签页"; }
       > .pf-lbl > .h::before { content: "在靠近窗口边缘的窗格继续向外移动焦点时，切换到上一或下一标签页（顶部标签用 ←/→，侧边标签用 ↑/↓）"; }
+      /* Tern 0.9.37 turned this toggle into Stay / Next tab / Wrap around */
+      .pf-seg:not(.tn-at) > button:nth-of-type(1)::after { content: "不切换"; }
+      .pf-seg:not(.tn-at) > button:nth-of-type(2)::after { content: "下一标签页"; }
+      .pf-seg:not(.tn-at) > button:nth-of-type(3)::after { content: "循环切换"; }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(5) {
       > .pf-lbl > .t::before { content: "向左移动焦点进入文件树"; }
@@ -189,7 +194,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > h2.pf-sec-t::before { content: "更新"; }
     > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(2) {
       > .pf-lbl > .h::before { content: "从 build.stencil.so 获取新版本，点击“重启并更新”可立即安装"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "检查更新"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):last-of-type {
       > .pf-lbl > .t::before { content: "自动检查并下载更新"; }
@@ -201,9 +206,9 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):last-of-type {
       > .pf-lbl > .t::before { content: "由 Tern 自动托管"; }
       > .pf-lbl > .h::before { content: "由 Tern 从 build.stencil.so 安装并自动更新 omp，并优先加入终端 PATH"; }
-      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; &::after { content: "安装 omp"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "停止托管"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; color: transparent; &::after { content: "安装 omp"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; color: transparent; &::after { content: "检查更新"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; color: transparent; &::after { content: "停止托管"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:has(.pf-status.tn-up-line):has(.pf-sw) + section.pf-sec + section.pf-sec {
@@ -211,9 +216,9 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):last-of-type {
       > .pf-lbl > .t::before { content: "由 Tern 自动托管"; }
       > .pf-lbl > .h::before { content: "由 Tern 从 build.stencil.so 安装并自动更新 ovnfs，并加入终端 PATH"; }
-      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; &::after { content: "安装 ovnfs"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "停止托管"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; color: transparent; &::after { content: "安装 ovnfs"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; color: transparent; &::after { content: "检查更新"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; color: transparent; &::after { content: "停止托管"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:has(.pf-status.tn-up-line):has(.pf-sw) + section.pf-sec + section.pf-sec + section.pf-sec {
@@ -221,13 +226,13 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):last-of-type {
       > .pf-lbl > .t::before { content: "由 Tern 自动托管"; }
       > .pf-lbl > .h::before { content: "由 Tern 安装并自动更新 ABKit（用于 omp 浏览器与 Tern 内置网页视图的底层渲染引擎）"; }
-      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; &::after { content: "安装 ABKit"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; &::after { content: "检查更新"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "停止托管"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type:last-of-type { font-size: 0; color: transparent; &::after { content: "安装 ABKit"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1):not(:last-of-type) { font-size: 0; color: transparent; &::after { content: "检查更新"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; color: transparent; &::after { content: "停止托管"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:has(.pf-status.tn-up-line):has(.pf-sw) {
-    > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(2) > .pf-lbl > .t { font-size: 13.5px; }
+    > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(2) > .pf-lbl > .t { font-size: 13.5px; visibility: visible; }
   }
 }
 
@@ -273,7 +278,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > h2.pf-sec-t::before { content: "Claude Code"; }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) {
       > .pf-lbl > .t::before { content: "命令行工具"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "安装"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "安装"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "以 ACP 对话方式打开 Claude Code"; }
@@ -288,7 +293,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > h2.pf-sec-t::before { content: "Codex"; }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) {
       > .pf-lbl > .t::before { content: "命令行工具"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "安装"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "安装"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "以 ACP 对话方式打开 Codex"; }
@@ -303,7 +308,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > h2.pf-sec-t::before { content: "GitHub Copilot"; }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) {
       > .pf-lbl > .t::before { content: "命令行工具"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "安装"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "安装"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "以 ACP 对话方式打开 GitHub Copilot"; }
@@ -319,7 +324,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):first-of-type {
       > .pf-lbl > .t::before { content: "智能体列表"; }
       > .pf-lbl > .h::before { content: "添加自定义的 ACP 智能体（指定 ID、显示名称和启动命令）"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "添加"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "添加"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:last-of-type {
@@ -327,14 +332,14 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):first-of-type {
       > .pf-lbl > .t::before { content: "服务器列表"; }
       > .pf-lbl > .h::before { content: "为 Tern 内置智能体会话注入的 MCP 工具服务器"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "添加"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "添加"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
-  > section.pf-sec:nth-of-type(4):has(.pf-row:nth-of-type(3)) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) > .pf-lbl > .h { font-size: 12.5px; }
-  > section.pf-sec:nth-of-type(5):has(.pf-row:nth-of-type(3)) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) > .pf-lbl > .h { font-size: 12.5px; }
-  > section.pf-sec:nth-of-type(6):has(.pf-row:nth-of-type(3)) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) > .pf-lbl > .h { font-size: 12.5px; }
-  > section.pf-sec:nth-last-of-type(2) > .pf-rows > .pf-row:not(.pf-key):not(:first-of-type) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
-  > section.pf-sec:last-of-type > .pf-rows > .pf-row:not(.pf-key):not(:first-of-type) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
+  > section.pf-sec:nth-of-type(4):has(.pf-row:nth-of-type(3)) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) > .pf-lbl > .h { font-size: 12.5px; visibility: visible; }
+  > section.pf-sec:nth-of-type(5):has(.pf-row:nth-of-type(3)) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) > .pf-lbl > .h { font-size: 12.5px; visibility: visible; }
+  > section.pf-sec:nth-of-type(6):has(.pf-row:nth-of-type(3)) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) > .pf-lbl > .h { font-size: 12.5px; visibility: visible; }
+  > section.pf-sec:nth-last-of-type(2) > .pf-rows > .pf-row:not(.pf-key):not(:first-of-type) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
+  > section.pf-sec:last-of-type > .pf-rows > .pf-row:not(.pf-key):not(:first-of-type) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(1) > .pf-items > .nav-row:nth-of-type(3).on) + .pf-scroll > .pf-doc {
@@ -345,7 +350,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .t::before { content: "主题同步状态"; }
       > .pf-lbl > .h::before { content: "未单独固定深浅色主题时，自动跟随 omp 的 config.yml 主题配置"; }
     }
-    .tn-pf-hint { font-size: 0; &::before { content: "悬停主题卡片可实时预览，点击即可选用；按住卡片可全窗口预览该主题效果。"; font-size: 12px; line-height: 16px; display: block; } }
+    .tn-pf-hint { font-size: 0; visibility: hidden; &::before { content: "悬停主题卡片可实时预览，点击即可选用；按住卡片可全窗口预览该主题效果。"; font-size: 12px; visibility: visible; display: inline-block; line-height: 16px; display: block; } }
   }
   > section.pf-sec:nth-of-type(2) {
     > h2.pf-sec-t::before { content: "外观与字体"; }
@@ -554,7 +559,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(3) {
       > .pf-lbl > .t::before { content: "底部组件"; }
       > .pf-lbl > .h::before { content: "窗口底部状态栏显示的组件（当前目录、分支、上次命令、系统指标、AI 用量等）"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "编辑组件…"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "编辑组件…"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(2) {
       > .pf-lbl > .t::before { content: "组件栏外观"; }
@@ -818,8 +823,8 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
   > section.pf-sec:nth-of-type(6) {
     > h2.pf-sec-t::before { content: "内置功能"; }
   }
-  > section.pf-sec:nth-of-type(3) .pf-seg:not(.tn-at) > button { font-size: 12.5px; }
-  > section.pf-sec:nth-of-type(6) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
+  > section.pf-sec:nth-of-type(3) .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); }
+  > section.pf-sec:nth-of-type(6) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(1) > .pf-items > .nav-row:nth-of-type(5).on) + .pf-scroll > .pf-doc {
@@ -1082,7 +1087,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .t::before { content: "systemd 服务"; }
     }
   }
-  > section.pf-sec > .pf-rows > .pf-row:not(.pf-key) > .pf-lbl > .h { font-size: 12.5px; }
+  > section.pf-sec > .pf-rows > .pf-row:not(.pf-key) > .pf-lbl > .h { font-size: 12.5px; visibility: visible; }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(1) > .pf-items > .nav-row:nth-of-type(6).on) + .pf-scroll > .pf-doc {
@@ -1096,7 +1101,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "指定文件夹"; }
       > .pf-lbl > .h::before { content: "选择“始终使用此位置”或“每次启动使用此位置”时的默认目录路径"; }
-      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; &::after { content: "选择…"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; color: transparent; &::after { content: "选择…"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(3) {
       > .pf-lbl > .t::before { content: "最近打开文件上限"; }
@@ -1120,7 +1125,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) {
       > .pf-lbl > .t::before { content: "支持的文件后缀"; }
       > .pf-lbl > .h::before { content: "打开与保存对话框提供的文件类型筛选器（多个通配符以空格分隔）"; }
-      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; &::after { content: "添加"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; color: transparent; &::after { content: "添加"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:nth-of-type(3) {
@@ -1324,7 +1329,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):first-of-type {
       > .pf-lbl > .t::before { content: "自动加载扩展库"; }
       > .pf-lbl > .h::before { content: "每次打开数据库时自动加载的 SQLite 扩展库列表"; }
-      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; &::after { content: "添加…"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:not(.pf-pick) { font-size: 0; color: transparent; &::after { content: "添加…"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(2) {
       > .pf-lbl > .t::before { content: "禁用 REGEXP 函数"; }
@@ -1418,8 +1423,8 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "记忆管理"; }
       > .pf-lbl > .h::before { content: "查看或编辑 Carly 的持久化记忆与新开对话"; }
-      .pf-ctl button.btn.sm:nth-of-type(1) { font-size: 0; &::after { content: "打开记忆"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "新建对话"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1) { font-size: 0; color: transparent; &::after { content: "打开记忆"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; color: transparent; &::after { content: "新建对话"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:nth-of-type(2) {
@@ -1444,7 +1449,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(1) > .pf-items > .nav-row:nth-of-type(9).on) + .pf-scroll > .pf-doc {
   > header.pf-head > h1.pf-title::before { content: "快捷键"; }
-  .tn-pf-hint { font-size: 0; &::before { content: "将鼠标悬停在下方任意命令上：点击 + 录制快捷键，点击按键上的 × 移除绑定；连续按键可组成按键序列，单独轻按修饰键（如双击 Ctrl / ⌘）也可绑定。"; font-size: 12px; line-height: 16px; display: block; } }
+  .tn-pf-hint { font-size: 0; visibility: hidden; &::before { content: "将鼠标悬停在下方任意命令上：点击 + 录制快捷键，点击按键上的 × 移除绑定；连续按键可组成按键序列，单独轻按修饰键（如双击 Ctrl / ⌘）也可绑定。"; font-size: 12px; visibility: visible; display: inline-block; line-height: 16px; display: block; } }
   > section.pf-sec:first-of-type:not(:has(.pf-seg:not(.tn-at))):not(:has(.pf-sw)) {
     > h2.pf-sec-t::before { content: "全局热键"; }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) {
@@ -1521,7 +1526,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
   > section.pf-sec:last-of-type {
     > h2.pf-sec-t::before { content: "Git 面板"; }
   }
-  > section.pf-sec:has(.pf-row:first-of-type .pf-seg:not(.tn-at) > button:nth-of-type(5)) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) .pf-seg:not(.tn-at) > button { font-size: 12.5px; }
+  > section.pf-sec:has(.pf-row:first-of-type .pf-seg:not(.tn-at) > button:nth-of-type(5)) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(1) > .pf-items > .nav-row:nth-of-type(10).on) + .pf-scroll > .pf-doc {
@@ -1596,7 +1601,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(5) {
       > .pf-lbl > .t::before { content: "面板默认宽度"; }
       > .pf-lbl > .h::before { content: "图谱各列与详情检查面板的默认宽度（px）"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "重置宽度"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "重置宽度"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:nth-of-type(5) {
@@ -1622,7 +1627,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(4) {
       > .pf-lbl > .t::before { content: "复制公钥"; }
       > .pf-lbl > .h::before { content: "将上述公钥文件内容复制到剪贴板"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "复制"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "复制"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:nth-of-type(8) {
@@ -1653,7 +1658,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "测试启动"; }
       > .pf-lbl > .h::before { content: "聚焦本机 Git 块或终端后点击以测试外部编辑器命令"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "打开编辑器"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "打开编辑器"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:nth-of-type(10) {
@@ -1711,10 +1716,10 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .h::before { content: "Git-flow hotfix 分支前缀"; }
     }
   }
-  > section.pf-sec:nth-of-type(4) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(4) .pf-seg:not(.tn-at) > button { font-size: 12.5px; }
-  > section.pf-sec:nth-of-type(5) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
-  > section.pf-sec:nth-of-type(6) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
-  > section.pf-sec:nth-of-type(13) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
+  > section.pf-sec:nth-of-type(4) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(4) .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); }
+  > section.pf-sec:nth-of-type(5) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
+  > section.pf-sec:nth-of-type(6) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
+  > section.pf-sec:nth-of-type(13) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(1) > .pf-items > .nav-row:nth-of-type(11).on) + .pf-scroll > .pf-doc {
@@ -1728,17 +1733,17 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(2) {
       > .pf-lbl > .t::before { content: "插件目录"; }
       > .pf-lbl > .h::before { content: "当你在文件夹中添加、修改或删除插件后，点击重载即可在当前窗口和会话守护进程中立即生效"; }
-      .pf-ctl button.btn.sm:nth-of-type(1) { font-size: 0; &::after { content: "重载"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "打开插件目录"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1) { font-size: 0; color: transparent; &::after { content: "重载"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; color: transparent; &::after { content: "打开插件目录"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):last-of-type {
       > .pf-lbl > .t::before { content: "安装插件…"; }
       > .pf-lbl > .h::before { content: "填入本地插件目录路径或 Git 仓库地址（如 github.com/owner/repo），自动安装到插件目录"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "安装"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "安装"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
-  > section.pf-sec:first-of-type > .pf-rows > .pf-row:not(.pf-key):not(:first-of-type):not(:nth-last-of-type(2)):not(:last-of-type) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
-  > section.pf-sec:not(:first-of-type) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
+  > section.pf-sec:first-of-type > .pf-rows > .pf-row:not(.pf-key):not(:first-of-type):not(:nth-last-of-type(2)):not(:last-of-type) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
+  > section.pf-sec:not(:first-of-type) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(2) > .pf-items > .nav-row:nth-of-type(1).on) + .pf-scroll > .pf-doc {
@@ -1762,7 +1767,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > h2.pf-sec-t::before { content: "当前窗口"; }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) {
       > .pf-lbl > .t::before { content: "当前会话概览"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "切换会话…"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "切换会话…"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "点击其他会话标签页时"; }
@@ -1792,7 +1797,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .h::before { content: "当会话中最后一个标签页关闭或移走时自动关闭该空会话，并将窗口切回上一会话"; }
     }
   }
-  > section.pf-sec:nth-of-type(2) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) > .pf-lbl > .h { font-size: 12.5px; }
+  > section.pf-sec:nth-of-type(2) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) > .pf-lbl > .h { font-size: 12.5px; visibility: visible; }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(2) > .pf-items > .nav-row:nth-of-type(2).on) + .pf-scroll > .pf-doc {
@@ -1809,7 +1814,7 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):last-of-type {
       > .pf-lbl > .t::before { content: "添加远程主机"; }
       > .pf-lbl > .h::before { content: "通过 SSH 在远端安装并启动 Tern 服务，或通过主机名/IP/中继节点 ID 连接"; }
-      .pf-ctl button.btn.sm:first-of-type { font-size: 0; &::after { content: "添加远程主机…"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:first-of-type { font-size: 0; color: transparent; &::after { content: "添加远程主机…"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
   }
   > section.pf-sec:nth-of-type(3) {
@@ -1855,9 +1860,9 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .h::before { content: "超过该时长的自托管环境快照将在下次发送后自动重建"; }
     }
   }
-  > section.pf-sec:nth-of-type(2) > .pf-rows > .pf-row:not(.pf-key):not(:last-of-type) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
-  > section.pf-sec:nth-of-type(4) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; } > .h { font-size: 12.5px; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; } }
-  > section.pf-sec:nth-of-type(5) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) .pf-seg:not(.tn-at) > button { font-size: 12.5px; }
+  > section.pf-sec:nth-of-type(2) > .pf-rows > .pf-row:not(.pf-key):not(:last-of-type) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
+  > section.pf-sec:nth-of-type(4) > .pf-rows > .pf-row:not(.pf-key) { > .pf-lbl { > .t { font-size: 13.5px; visibility: visible; } > .h { font-size: 12.5px; visibility: visible; } } .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); } }
+  > section.pf-sec:nth-of-type(5) > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); }
 }
 
 .pf-nav:has(> .pf-groups > .pf-group:nth-of-type(2) > .pf-items > .nav-row:nth-of-type(3).on) + .pf-scroll > .pf-doc {
@@ -1909,8 +1914,8 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) {
       > .pf-lbl > .t::before { content: "settings.json 配置文件"; }
       > .pf-lbl > .h::before { content: "直接打开并编辑 JSON 配置文件，或立即重新加载磁盘配置"; }
-      .pf-ctl button.btn.sm:nth-of-type(1) { font-size: 0; &::after { content: "打开 settings.json"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "重载"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1) { font-size: 0; color: transparent; &::after { content: "打开 settings.json"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; color: transparent; &::after { content: "重载"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "配置目录"; }
@@ -1922,8 +1927,8 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(1) {
       > .pf-lbl > .t::before { content: "日志与应用状态"; }
       > .pf-lbl > .h::before { content: "打开运行日志目录或应用持久化状态目录"; }
-      .pf-ctl button.btn.sm:nth-of-type(1) { font-size: 0; &::after { content: "打开日志"; font-size: 12.5px; white-space: nowrap; } }
-      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; &::after { content: "打开数据目录"; font-size: 12.5px; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(1) { font-size: 0; color: transparent; &::after { content: "打开日志"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
+      .pf-ctl button.btn.sm:nth-of-type(2) { font-size: 0; color: transparent; &::after { content: "打开数据目录"; font-size: 12.5px; visibility: visible; display: inline-block; white-space: nowrap; } }
     }
     > .pf-rows > .pf-row:not(.pf-key):nth-of-type(2) {
       > .pf-lbl > .t::before { content: "日志目录"; }
@@ -1946,6 +1951,17 @@ button.tb-files > span.lbl { font-size: 0; &::before { content: "文件"; font-s
       > .pf-lbl > .h::before { content: "读取 omp 配置与主题的文件夹路径"; }
     }
   }
-  > section.pf-sec:nth-of-type(1) > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(6) > .pf-lbl > .h { font-size: 12.5px; }
-  > section.pf-sec:nth-of-type(1) > .pf-rows > .pf-row:not(.pf-key):last-of-type .pf-seg:not(.tn-at) > button { font-size: 12.5px; }
+  > section.pf-sec:nth-of-type(1) > .pf-rows > .pf-row:not(.pf-key):nth-last-of-type(6) > .pf-lbl > .h { font-size: 12.5px; visibility: visible; }
+  > section.pf-sec:nth-of-type(1) > .pf-rows > .pf-row:not(.pf-key):last-of-type .pf-seg:not(.tn-at) > button { font-size: 12.5px; visibility: visible; color: var(--zh-fg); }
 }
+
+/* Tern 0.9.37: font-size:0 no longer hides text. Translated buttons hide their English with a
+ * transparent color (visibility would also hide the button and the selected pill), so their
+ * Chinese ::after and any English left untranslated take the native text color from --zh-fg. */
+.pf-seg > button { --zh-fg: var(--t3); }
+.pf-seg > button.on { --zh-fg: var(--t1); }
+.pf-ctl button.btn { --zh-fg: var(--t1); }
+.pf-seg > button::after, .pf-ctl button.btn::after { color: var(--zh-fg); }
+/* The transparent English still sizes the button, so lay the Chinese label over it, centered. */
+.pf-seg > button, .pf-ctl button.btn { position: relative; }
+.pf-seg > button::after, .pf-ctl button.btn::after { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); display: block; text-align: center; }
